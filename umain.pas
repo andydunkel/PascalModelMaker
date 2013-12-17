@@ -19,6 +19,7 @@ type
     actNew: TAction;
     ActionList: TActionList;
     GroupBoxProperties: TGroupBox;
+    ImageListTree: TImageList;
     ImageListToolbar: TImageList;
     MainMenu: TMainMenu;
     MenuItemNew: TMenuItem;
