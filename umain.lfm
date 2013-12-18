@@ -1,12 +1,13 @@
 object FormMain: TFormMain
-  Left = 457
+  Left = 471
   Height = 590
-  Top = 193
+  Top = 195
   Width = 869
   Caption = 'DelphiModelMaker'
   ClientHeight = 570
   ClientWidth = 869
   Menu = MainMenu
+  OnCreate = FormCreate
   Position = poScreenCenter
   LCLVersion = '1.0.12.0'
   object ToolBar: TToolBar
@@ -40,9 +41,31 @@ object FormMain: TFormMain
       Style = tbsSeparator
     end
     object ToolButtonExit: TToolButton
-      Left = 80
+      Left = 159
       Top = 2
       Action = actExit
+    end
+    object ToolButtonDeleteElement: TToolButton
+      Left = 126
+      Top = 2
+      Action = actDeleteItem
+    end
+    object ToolButtonNewClass: TToolButton
+      Left = 80
+      Top = 2
+      Action = actNewClass
+    end
+    object ToolButton4: TToolButton
+      Left = 149
+      Top = 2
+      Width = 10
+      Caption = 'ToolButton4'
+      Style = tbsSeparator
+    end
+    object ToolButtonNewAttribute: TToolButton
+      Left = 103
+      Top = 2
+      Action = actNewAttribute
     end
   end
   object StatusBar: TStatusBar
@@ -74,6 +97,10 @@ object FormMain: TFormMain
         DefaultItemHeight = 18
         Images = ImageListTree
         TabOrder = 0
+        Items.Data = {
+          F9FFFFFF0200010000000000000000000000FFFFFFFFFFFFFFFF000000000000
+          0000000800000045696E7472616730
+        }
       end
       object Splitter: TSplitter
         Left = 524
@@ -475,6 +502,12 @@ object FormMain: TFormMain
         Action = actExit
       end
     end
+    object MenuHelp: TMenuItem
+      Caption = '&Help'
+      object MenuItemInfo: TMenuItem
+        Caption = '&Info'
+      end
+    end
   end
   object ActionList: TActionList
     Images = ImageListToolbar
@@ -500,6 +533,22 @@ object FormMain: TFormMain
       Caption = 'Exit'
       ImageIndex = 7
       OnExecute = actExitExecute
+    end
+    object actDeleteItem: TAction
+      Category = 'Model'
+      Caption = 'Delete Item'
+      ImageIndex = 5
+    end
+    object actNewClass: TAction
+      Category = 'Model'
+      Caption = 'New Class'
+      ImageIndex = 3
+      OnExecute = actNewClassExecute
+    end
+    object actNewAttribute: TAction
+      Category = 'Model'
+      Caption = 'New Attribute'
+      ImageIndex = 4
     end
   end
   object ImageListTree: TImageList
@@ -604,5 +653,9 @@ object FormMain: TFormMain
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00FFFFFF00FFFFFF00
     }
+  end
+  object PopupMenuTree: TPopupMenu
+    left = 264
+    top = 216
   end
 end
