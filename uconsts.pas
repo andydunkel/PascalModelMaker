@@ -17,6 +17,8 @@ const
      TYPE_INT = 'Integer';
      TYPE_DOUBLE = 'real';
 
+     CRLF = #13#10;
+
 implementation
 
 end.

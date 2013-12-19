@@ -5,23 +5,41 @@ unit uData;
 interface
 
 uses
-  Classes, SysUtils, uConsts;
+  Classes, SysUtils, uConsts, fgl;
 
 type
+    IObserver = interface(IInterface)
+      procedure Refresh();
+    end;
+
+type
+
+    { TNodeData }
+
+    TNodeData = class;  //forward declaration
+    TDataTree = class; //forward declaration
+    TChildList = specialize TFPGObjectList<TNodeData>;
     TNodeData = class
     protected
       FParent : TNodeData;
+      FChildren : TChildList;
       FName : String;
       FDataType : String;
       FComment : String;
       FElementType : TElementType;
+      FPersist : boolean;
+    public
+      constructor Create();
     published
       property Name : String read FName write FName;
       property DataType : String read FDataType write FDataType;
       property Comment : String read FComment write FComment;
       property Parent : TNodeData read FParent write FParent;
       property ElementType : TElementType read FElementType write FElementType;
+      property Children : TChildlist read FChildren;
+      property Persist : boolean read FPersist write FPersist;
 end;
+
 
 type
 
@@ -29,35 +47,37 @@ type
 
  TDataTree = class
   protected
-    FRootNode : TNodeData;
+    FClasses : TChildList;
     FName : String;
     FFilePath : String;
     FSaved : boolean;
   public
-    procedure AddClass(Name : String);
     constructor Create();
   published
-    property RootNode : TNodeData read FRootNode write FRootNode;
     property Name : String read FName write FName;
     property FilePath : String read FFilePath write FFilePath;
     property Saved : boolean read FSaved write FSaved;
+    property Classes : TChildList read FClasses;
 end;
 
 implementation
 
+{ TNodeData }
+
+constructor TNodeData.Create;
+begin
+  FChildren := TChildList.Create(true);
+end;
+
 { TDataTree }
 
-procedure TDataTree.AddClass(Name: String);
-begin
-
-end;
 
 constructor TDataTree.Create;
 begin
-     Self.RootNode := TNodeData.Create();
-     Self.RootNode.Name := 'Model';
-     Self.Name := 'Empty Model';
-     Self.Saved := false;
+     Self.Name:= 'Model';
+     Self.Saved:= false;
+
+     FClasses:= TChildList.Create(true);
 end;
 
 end.
