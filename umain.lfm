@@ -130,6 +130,7 @@ object FormMain: TFormMain
             Top = 46
             Width = 148
             Caption = 'Generate Observer Code'
+            OnChange = updateModelTab
             TabOrder = 0
           end
           object LabelModelName: TLabel
@@ -146,6 +147,7 @@ object FormMain: TFormMain
             Top = 15
             Width = 234
             Anchors = [akTop, akLeft, akRight]
+            OnExit = updateModelTab
             TabOrder = 1
           end
           object CheckBoxPersistence: TCheckBox
@@ -154,6 +156,7 @@ object FormMain: TFormMain
             Top = 70
             Width = 160
             Caption = 'Generate Persistence Code'
+            OnChange = updateModelTab
             TabOrder = 2
           end
         end
@@ -175,6 +178,7 @@ object FormMain: TFormMain
             Top = 14
             Width = 240
             Anchors = [akTop, akLeft, akRight]
+            OnExit = UpdateClassProperties
             TabOrder = 0
           end
           object CheckBoxClassPersist: TCheckBox
@@ -184,6 +188,7 @@ object FormMain: TFormMain
             Width = 54
             Caption = 'Persist'
             Checked = True
+            OnChange = UpdateClassProperties
             State = cbChecked
             TabOrder = 1
           end
@@ -214,6 +219,8 @@ object FormMain: TFormMain
             Top = 14
             Width = 232
             Anchors = [akTop, akLeft, akRight]
+            OnChange = UpdateAttrProperties
+            OnExit = UpdateAttrProperties
             TabOrder = 0
           end
           object ComboBoxAttrType: TComboBox
@@ -223,6 +230,8 @@ object FormMain: TFormMain
             Width = 232
             Anchors = [akTop, akLeft, akRight]
             ItemHeight = 15
+            OnChange = UpdateAttrProperties
+            OnExit = UpdateAttrProperties
             TabOrder = 1
           end
           object CheckBoxAttrPersist: TCheckBox
@@ -232,6 +241,7 @@ object FormMain: TFormMain
             Width = 54
             Caption = 'Persist'
             Checked = True
+            OnChange = UpdateAttrProperties
             State = cbChecked
             TabOrder = 2
           end
@@ -241,6 +251,7 @@ object FormMain: TFormMain
             Top = 102
             Width = 38
             Caption = 'List'
+            OnChange = UpdateAttrProperties
             TabOrder = 3
           end
         end
@@ -1166,6 +1177,7 @@ object FormMain: TFormMain
       Category = 'Model'
       Caption = 'Delete Item'
       ImageIndex = 5
+      OnExecute = actDeleteItemExecute
     end
     object actNewClass: TAction
       Category = 'Model'

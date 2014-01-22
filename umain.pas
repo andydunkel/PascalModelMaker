@@ -70,11 +70,15 @@ type
     ToolButtonOpen: TToolButton;
     ToolButtonSave: TToolButton;
     TreeViewModel: TTreeView;
+    procedure actDeleteItemExecute(Sender: TObject);
     procedure actExitExecute(Sender: TObject);
     procedure actNewClassExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure PageControlPropertiesChange(Sender: TObject);
     procedure TreeViewModelSelectionChanged(Sender: TObject);
+    procedure UpdateAttrProperties(Sender: TObject);
+    procedure UpdateClassProperties(Sender: TObject);
+    procedure UpdateModelTab(Sender: TObject);
   private
     { private declarations }
     TreeData : TDataTree;
@@ -111,6 +115,11 @@ begin
   Application.Terminate;
 end;
 
+procedure TFormMain.actDeleteItemExecute(Sender: TObject);
+begin
+  ShowMessage('Delete');
+end;
+
 procedure TFormMain.actNewClassExecute(Sender: TObject);
 begin
      Controller.AddClass('NewClass');
@@ -137,6 +146,22 @@ begin
        data:= GetNodeElement(TreeViewModel.Selected);
        HandleEnablement(data);
      end;
+end;
+
+procedure TFormMain.UpdateAttrProperties(Sender: TObject);
+begin
+     Controller.UpdateAttrProperties(EditAttrName.Text, ComboBoxAttrType.Text
+                                 , CheckBoxAttrPersist.Checked, CheckboxAttrList.Checked);
+end;
+
+procedure TFormMain.UpdateClassProperties(Sender: TObject);
+begin
+     Controller.UpdateClassProperties(EditClassName.Text, CheckBoxClassPersist.Checked);
+end;
+
+procedure TFormMain.UpdateModelTab(Sender: TObject);
+begin
+     Controller.UpdateModelProperties(EditUnitName.Text, CheckBoxObserver.Checked, CheckBoxPersistence.Checked);
 end;
 
 function TFormMain.GetNodeElement(Node: TTreeNode): TNodeData;
@@ -177,7 +202,7 @@ begin
      PageControlProperties.ActivePageIndex:= TAB_CLASS;
 
      EditClassName.Text:= Controller.CurrentNode.Name;
-     CheckBoxClassPersist:= Controller.CurrentNode.Persist;
+     CheckBoxClassPersist.Checked:= Controller.CurrentNode.Persist;
 end;
 
 procedure TFormMain.HandleEnablementAttr();
