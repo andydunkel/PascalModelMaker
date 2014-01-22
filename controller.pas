@@ -15,11 +15,14 @@ type
       private
         FTree : TDataTree;
         FObserver : IObserver;
+        FCurrentNode : TNodeData;
       public
         procedure AddClass(Name : String);
         procedure Refresh();
         constructor Create(Data : TDataTree; Observer : IObserver);
+        property CurrentNode : TNodeData read FCurrentNode write FCurrentNode;
     end;
+
 
 implementation
 

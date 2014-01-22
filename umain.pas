@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, SynHighlighterPas, SynEdit, Forms, Controls,
   Graphics, Dialogs, ComCtrls, ExtCtrls, StdCtrls, Menus, ActnList, uData,
-  Controller;
+  Controller, uConsts;
 
 type
 
@@ -28,7 +28,7 @@ type
     CheckBoxObserver: TCheckBox;
     CheckBoxPersistence: TCheckBox;
     ComboBoxAttrType: TComboBox;
-    Edit1: TEdit;
+    EditUnitName: TEdit;
     EditAttrName: TEdit;
     EditClassName: TEdit;
     ImageListTree: TImageList;
@@ -56,6 +56,7 @@ type
     TabPropAttr: TTabSheet;
     TabPropClass: TTabSheet;
     TabPropModel: TTabSheet;
+    Empty: TTabSheet;
     TabSheetModel: TTabSheet;
     TabSheetOutput: TTabSheet;
     ToolBar: TToolBar;
@@ -79,10 +80,22 @@ type
     TreeData : TDataTree;
     Controller : TController;
     function GetNodeElement(Node: TTreeNode):TNodeData;
+    procedure HandleEnablement(Data: TNodeData);
+    procedure HandleEnablementModel();
+    procedure HandleEnablementClass();
+    procedure HandleEnablementAttr();
+
   public
     { public declarations }
     procedure Refresh();
   end;
+
+const
+  TAB_EMPTY = 0;
+  TAB_MODEL = 1;
+  TAB_CLASS = 2;
+  TAB_ATTR = 3;
+  TAB_METHOD = 4;
 
 var
   FormMain: TFormMain;
@@ -106,7 +119,9 @@ end;
 procedure TFormMain.FormCreate(Sender: TObject);
 begin
      TreeData:= TDataTree.Create();
-     Controller := TController.Create(TreeData, Self);
+     Controller:= TController.Create(TreeData, Self);
+     PageControlProperties.ShowTabs:= false;
+     PageControlProperties.ActivePageIndex:= TAB_EMPTY;
 end;
 
 procedure TFormMain.PageControlPropertiesChange(Sender: TObject);
@@ -120,9 +135,7 @@ var
 begin
      if TreeViewModel.Selected <> nil then begin
        data:= GetNodeElement(TreeViewModel.Selected);
-       if data <> nil then begin
-
-       end;
+       HandleEnablement(data);
      end;
 end;
 
@@ -133,6 +146,52 @@ begin
        Result := TNodeData(Node.Data);
      end;
 end;
+
+procedure TFormMain.HandleEnablement(Data: TNodeData);
+begin
+     Controller.CurrentNode:= Data;
+
+     if Data = nil then begin
+       HandleEnablementModel();
+       Exit;
+     end;
+
+     case Data.ElementType of
+          _Class : HandleEnablementClass();
+          _Attribute : HandleEnablementAttr();
+     end;
+end;
+
+procedure TFormMain.HandleEnablementModel;
+begin
+  PageControlProperties.ActivePageIndex:= TAB_MODEL;
+  EditUnitName.Text:= TreeData.UnitName;
+  CheckBoxObserver.Checked:= TreeData.GenerateObserverCode;
+  CheckBoxPersistence.Checked:= TreeData.PersistanceCode;
+end;
+
+procedure TFormMain.HandleEnablementClass();
+begin
+     actNewAttribute.Enabled:= true;
+     actNewClass.Enabled:= true;
+     PageControlProperties.ActivePageIndex:= TAB_CLASS;
+
+     EditClassName.Text:= Controller.CurrentNode.Name;
+     CheckBoxClassPersist:= Controller.CurrentNode.Persist;
+end;
+
+procedure TFormMain.HandleEnablementAttr();
+begin
+     actNewAttribute.Enabled:= false;
+     actNewClass.Enabled:= false;
+     PageControlProperties.ActivePageIndex:= TAB_ATTR;
+
+     EditAttrName.Text:= Controller.CurrentNode.Name;
+     ComboBoxAttrType.Text:= Controller.CurrentNode.DataType;
+     CheckBoxAttrPersist.Checked:= Controller.CurrentNode.Persist;
+     CheckBoxAttrList.Checked:= Controller.CurrentNode.List;
+end;
+
 
 procedure TFormMain.Refresh;
 var

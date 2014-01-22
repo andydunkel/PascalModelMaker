@@ -9,7 +9,7 @@ uses
 
 
 type
-    TElementType = ( _Class, _Attribute, _Method);
+    TElementType = ( _Model, _Class, _Attribute, _Method);
 
 const
      TYPE_STRING = 'String';

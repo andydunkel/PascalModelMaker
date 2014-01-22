@@ -28,6 +28,7 @@ type
       FComment : String;
       FElementType : TElementType;
       FPersist : boolean;
+      FList : boolean;
     public
       constructor Create();
     published
@@ -38,6 +39,7 @@ type
       property ElementType : TElementType read FElementType write FElementType;
       property Children : TChildlist read FChildren;
       property Persist : boolean read FPersist write FPersist;
+      property List : boolean read FList write FList;
 end;
 
 
@@ -51,6 +53,9 @@ type
     FName : String;
     FFilePath : String;
     FSaved : boolean;
+    FUnitName : String;
+    FGenerateObserverCode : boolean;
+    FPersistanceCode : boolean;
   public
     constructor Create();
   published
@@ -58,6 +63,9 @@ type
     property FilePath : String read FFilePath write FFilePath;
     property Saved : boolean read FSaved write FSaved;
     property Classes : TChildList read FClasses;
+    property UnitName : String read FUnitName write FUnitName;
+    property GenerateObserverCode : boolean read FGenerateObserverCode write FGenerateObserverCode;
+    property PersistanceCode : boolean read FPersistanceCode write FPersistanceCode;
 end;
 
 implementation
@@ -75,8 +83,10 @@ end;
 constructor TDataTree.Create;
 begin
      Self.Name:= 'Model';
+     Self.UnitName:= 'ModelUnit';
      Self.Saved:= false;
-
+     Self.GenerateObserverCode:=true;
+     Self.PersistanceCode:=false;
      FClasses:= TChildList.Create(true);
 end;
 
