@@ -38,7 +38,7 @@
         <PackageName Value="LCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="6">
+    <Units Count="7">
       <Unit0>
         <Filename Value="DelphiModelling.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -72,6 +72,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="Generator"/>
       </Unit5>
+      <Unit6>
+        <Filename Value="xmlhelper.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="XMLHelper"/>
+      </Unit6>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

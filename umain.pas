@@ -46,9 +46,11 @@ type
     MenuItemSep1: TMenuItem;
     MenuItemExit: TMenuItem;
     MenuItemFile: TMenuItem;
+    OpenModelDialog: TOpenDialog;
     PageControl: TPageControl;
     PageControlProperties: TPageControl;
     PopupMenuTree: TPopupMenu;
+    SaveDialogModel: TSaveDialog;
     Splitter: TSplitter;
     StatusBar: TStatusBar;
     Output: TSynEdit;
@@ -73,8 +75,10 @@ type
     procedure actDeleteItemExecute(Sender: TObject);
     procedure actExitExecute(Sender: TObject);
     procedure actNewClassExecute(Sender: TObject);
+    procedure actSaveExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure PageControlPropertiesChange(Sender: TObject);
+    procedure ToolButtonSaveClick(Sender: TObject);
     procedure TreeViewModelSelectionChanged(Sender: TObject);
     procedure UpdateAttrProperties(Sender: TObject);
     procedure UpdateClassProperties(Sender: TObject);
@@ -125,6 +129,13 @@ begin
      Controller.AddClass('NewClass');
 end;
 
+procedure TFormMain.actSaveExecute(Sender: TObject);
+begin
+     if SaveDialogModel.Execute then begin
+       Controller.SaveFile(SaveDialogModel.FileName);
+     end;
+end;
+
 procedure TFormMain.FormCreate(Sender: TObject);
 begin
      TreeData:= TDataTree.Create();
@@ -136,6 +147,10 @@ end;
 procedure TFormMain.PageControlPropertiesChange(Sender: TObject);
 begin
 
+end;
+
+procedure TFormMain.ToolButtonSaveClick(Sender: TObject);
+begin
 end;
 
 procedure TFormMain.TreeViewModelSelectionChanged(Sender: TObject);

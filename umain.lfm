@@ -1,7 +1,7 @@
 object FormMain: TFormMain
-  Left = 1667
+  Left = 516
   Height = 590
-  Top = 123
+  Top = 451
   Width = 869
   Caption = 'DelphiModelMaker'
   ClientHeight = 570
@@ -1166,6 +1166,7 @@ object FormMain: TFormMain
       Category = 'File'
       Caption = '&Save'
       ImageIndex = 6
+      OnExecute = actSaveExecute
     end
     object actExit: TAction
       Category = 'File'
@@ -1315,5 +1316,18 @@ object FormMain: TFormMain
     NestedComments = False
     left = 80
     top = 136
+  end
+  object OpenModelDialog: TOpenDialog
+    DefaultExt = '.delphimodel'
+    Filter = 'Delphi Model File (*.delphimodel)|.delphimodel|All files (*.*)|.'
+    left = 199
+    top = 275
+  end
+  object SaveDialogModel: TSaveDialog
+    DefaultExt = '.delphimodel'
+    FileName = 'model.delphimodel'
+    Filter = 'Delphi Model File (*.delphimodel)|.delphimodel|All files (*.*)|.'
+    left = 88
+    top = 275
   end
 end

@@ -5,7 +5,7 @@ unit Controller;
 interface
 
 uses
-  Classes, SysUtils, uData, uConsts;
+  Classes, SysUtils, uData, uConsts, XMLWrite, DOM;
 
 type
 
@@ -19,11 +19,13 @@ type
       public
         procedure AddClass(Name : String);
         procedure Refresh();
-        procedure UpdateModelProperties(Name : String; ObserverCode : boolean; PersistanceCode : boolean);
-        procedure UpdateClassProperties(NameOfClass : String; ClassPersist : boolean);
-        procedure UpdateAttrProperties(AttrName : String; AttrType : String; AttrPersist : boolean; AttrList : boolean);
-        constructor Create(Data : TDataTree; Observer : IObserver);
-        property CurrentNode : TNodeData read FCurrentNode write FCurrentNode;
+        procedure UpdateModelProperties(Name: String; ObserverCode : boolean; PersistanceCode: boolean);
+        procedure UpdateClassProperties(NameOfClass: String; ClassPersist : boolean);
+        procedure UpdateAttrProperties(AttrName: String; AttrType: String; AttrPersist: boolean; AttrList: boolean);
+        procedure SaveFile(FileName: String);
+        procedure LoadFile(FileName: String);
+        constructor Create(Data: TDataTree; Observer : IObserver);
+        property CurrentNode: TNodeData read FCurrentNode write FCurrentNode;
     end;
 
 
@@ -78,6 +80,40 @@ begin
           Persist:= AttrPersist;
           List:= AttrList;
      end;
+end;
+
+procedure TController.SaveFile(FileName: String);
+var
+   Doc: TXMLDocument;
+   RootNode, MetaNode, ModelNode: TDOMNode;
+begin
+     Doc:= TXMLDocument.Create();
+
+     RootNode:= Doc.CreateElement('Content');
+     Doc.AppendChild(RootNode);
+
+     //Create meta information
+     MetaNode:= Doc.CreateElement('Meta');
+     TDOMElement(MetaNode).SetAttribute('Version', '1');
+     RootNode.AppendChild(MetaNode);
+
+     //Save model
+     ModelNode:= Doc.CreateElement('model');
+     TDomElement(ModelNode).SetAttribute('UnitName', FTree.UnitName);
+     TDomElement(ModelNode).SetAttribute('GenerateObserverCode', BoolToStr(FTree.GenerateObserverCode));
+     TDomElement(ModelNode).SetAttribute('PersistanceCode', BoolToStr(FTree.PersistanceCode));
+     TDomElement(ModelNode).SetAttribute('UnitName', FTree.UnitName);
+
+     //Save elements
+
+     RootNode:= Doc.DocumentElement;
+
+     WriteXMLFile(Doc, FileName);
+end;
+
+procedure TController.LoadFile(FileName: String);
+begin
+
 end;
 
 constructor TController.Create(Data: TDataTree; Observer : IObserver);

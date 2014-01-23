@@ -59,7 +59,6 @@ type
   public
     constructor Create();
   published
-    property Name : String read FName write FName;
     property FilePath : String read FFilePath write FFilePath;
     property Saved : boolean read FSaved write FSaved;
     property Classes : TChildList read FClasses;
@@ -82,7 +81,6 @@ end;
 
 constructor TDataTree.Create;
 begin
-     Self.Name:= 'Model';
      Self.UnitName:= 'ModelUnit';
      Self.Saved:= false;
      Self.GenerateObserverCode:=true;
