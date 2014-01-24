@@ -56,6 +56,7 @@ type
     FUnitName : String;
     FGenerateObserverCode : boolean;
     FPersistanceCode : boolean;
+    FExportPath : String;
   public
     constructor Create();
   published
@@ -63,6 +64,7 @@ type
     property Saved : boolean read FSaved write FSaved;
     property Classes : TChildList read FClasses;
     property UnitName : String read FUnitName write FUnitName;
+    property ExportPath : String read FExportPath write FExportPath;
     property GenerateObserverCode : boolean read FGenerateObserverCode write FGenerateObserverCode;
     property PersistanceCode : boolean read FPersistanceCode write FPersistanceCode;
 end;

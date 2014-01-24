@@ -38,7 +38,7 @@
         <PackageName Value="LCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="7">
+    <Units Count="8">
       <Unit0>
         <Filename Value="DelphiModelling.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -77,6 +77,13 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="XMLHelper"/>
       </Unit6>
+      <Unit7>
+        <Filename Value="aboutdialog.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="About"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="AboutDialog"/>
+      </Unit7>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

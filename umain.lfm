@@ -1,7 +1,7 @@
 object FormMain: TFormMain
-  Left = 516
+  Left = 426
   Height = 590
-  Top = 451
+  Top = 381
   Width = 869
   Caption = 'DelphiModelMaker'
   ClientHeight = 570
@@ -112,9 +112,9 @@ object FormMain: TFormMain
         Height = 493
         Top = 0
         Width = 332
-        ActivePage = TabPropAttr
+        ActivePage = TabPropModel
         Align = alClient
-        TabIndex = 3
+        TabIndex = 1
         TabOrder = 2
         OnChange = PageControlPropertiesChange
         object Empty: TTabSheet
@@ -158,6 +158,34 @@ object FormMain: TFormMain
             Caption = 'Generate Persistence Code'
             OnChange = updateModelTab
             TabOrder = 2
+          end
+          object Label1: TLabel
+            Left = 7
+            Height = 16
+            Top = 105
+            Width = 61
+            Caption = 'Export Path'
+            ParentColor = False
+          end
+          object EditExportPath: TEdit
+            Left = 77
+            Height = 23
+            Top = 102
+            Width = 202
+            Anchors = [akTop, akLeft, akRight]
+            OnChange = updateModelTab
+            ReadOnly = True
+            TabOrder = 3
+          end
+          object ButtonSetExportPath: TButton
+            Left = 277
+            Height = 25
+            Top = 100
+            Width = 34
+            Anchors = [akTop, akRight]
+            Caption = '...'
+            OnClick = ButtonSetExportPathClick
+            TabOrder = 4
           end
         end
         object TabPropClass: TTabSheet
@@ -1145,6 +1173,7 @@ object FormMain: TFormMain
       Caption = '&Help'
       object MenuItemInfo: TMenuItem
         Caption = '&Info'
+        OnClick = MenuItemInfoClick
       end
     end
   end
@@ -1329,5 +1358,10 @@ object FormMain: TFormMain
     Filter = 'Delphi Model File (*.delphimodel)|.delphimodel|All files (*.*)|.'
     left = 88
     top = 275
+  end
+  object SelectExportDirectoryDialog: TSelectDirectoryDialog
+    Title = 'Select export directory'
+    left = 688
+    top = 264
   end
 end

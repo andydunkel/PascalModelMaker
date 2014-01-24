@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, SynHighlighterPas, SynEdit, Forms, Controls,
   Graphics, Dialogs, ComCtrls, ExtCtrls, StdCtrls, Menus, ActnList, uData,
-  Controller, uConsts;
+  Controller, uConsts, AboutDialog;
 
 type
 
@@ -22,17 +22,20 @@ type
     actOpen: TAction;
     actNew: TAction;
     ActionList: TActionList;
+    ButtonSetExportPath: TButton;
     CheckboxAttrList: TCheckBox;
     CheckBoxClassPersist: TCheckBox;
     CheckBoxAttrPersist: TCheckBox;
     CheckBoxObserver: TCheckBox;
     CheckBoxPersistence: TCheckBox;
     ComboBoxAttrType: TComboBox;
+    EditExportPath: TEdit;
     EditUnitName: TEdit;
     EditAttrName: TEdit;
     EditClassName: TEdit;
     ImageListTree: TImageList;
     ImageListToolbar: TImageList;
+    Label1: TLabel;
     LabelAttrName: TLabel;
     LabelAttrType: TLabel;
     LabelClassName: TLabel;
@@ -51,6 +54,7 @@ type
     PageControlProperties: TPageControl;
     PopupMenuTree: TPopupMenu;
     SaveDialogModel: TSaveDialog;
+    SelectExportDirectoryDialog: TSelectDirectoryDialog;
     Splitter: TSplitter;
     StatusBar: TStatusBar;
     Output: TSynEdit;
@@ -76,7 +80,9 @@ type
     procedure actExitExecute(Sender: TObject);
     procedure actNewClassExecute(Sender: TObject);
     procedure actSaveExecute(Sender: TObject);
+    procedure ButtonSetExportPathClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure MenuItemInfoClick(Sender: TObject);
     procedure PageControlPropertiesChange(Sender: TObject);
     procedure ToolButtonSaveClick(Sender: TObject);
     procedure TreeViewModelSelectionChanged(Sender: TObject);
@@ -136,12 +142,27 @@ begin
      end;
 end;
 
+procedure TFormMain.ButtonSetExportPathClick(Sender: TObject);
+begin
+  if SelectExportDirectoryDialog.Execute then begin
+    EditExportPath.Text:= SelectExportDirectoryDialog.FileName;
+  end;
+end;
+
 procedure TFormMain.FormCreate(Sender: TObject);
 begin
      TreeData:= TDataTree.Create();
      Controller:= TController.Create(TreeData, Self);
      PageControlProperties.ShowTabs:= false;
      PageControlProperties.ActivePageIndex:= TAB_EMPTY;
+end;
+
+procedure TFormMain.MenuItemInfoClick(Sender: TObject);
+var dlg : TAbout;
+begin
+     dlg:= TAbout.Create(Self);
+     dlg.ShowModal;
+     FreeAndNil(dlg);
 end;
 
 procedure TFormMain.PageControlPropertiesChange(Sender: TObject);
@@ -208,6 +229,7 @@ begin
   EditUnitName.Text:= TreeData.UnitName;
   CheckBoxObserver.Checked:= TreeData.GenerateObserverCode;
   CheckBoxPersistence.Checked:= TreeData.PersistanceCode;
+  actDeleteItem.Enabled:= false;
 end;
 
 procedure TFormMain.HandleEnablementClass();
@@ -218,6 +240,7 @@ begin
 
      EditClassName.Text:= Controller.CurrentNode.Name;
      CheckBoxClassPersist.Checked:= Controller.CurrentNode.Persist;
+     actDeleteItem.Enabled:= true;
 end;
 
 procedure TFormMain.HandleEnablementAttr();
@@ -230,6 +253,7 @@ begin
      ComboBoxAttrType.Text:= Controller.CurrentNode.DataType;
      CheckBoxAttrPersist.Checked:= Controller.CurrentNode.Persist;
      CheckBoxAttrList.Checked:= Controller.CurrentNode.List;
+     actDeleteItem.Enabled:= false;
 end;
 
 
@@ -240,7 +264,7 @@ var
 begin
      //Root
      TreeViewModel.Items.Clear;
-     nodeRoot:= TreeViewModel.Items.Add(nil, TreeData.Name);
+     nodeRoot:= TreeViewModel.Items.Add(nil, TreeData.UnitName);
      nodeRoot.ImageIndex:= 0;
      nodeRoot.SelectedIndex:= nodeRoot.ImageIndex;
 

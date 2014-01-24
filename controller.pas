@@ -103,6 +103,7 @@ begin
      TDomElement(ModelNode).SetAttribute('GenerateObserverCode', BoolToStr(FTree.GenerateObserverCode));
      TDomElement(ModelNode).SetAttribute('PersistanceCode', BoolToStr(FTree.PersistanceCode));
      TDomElement(ModelNode).SetAttribute('UnitName', FTree.UnitName);
+     TDomElement(ModelNode).SetAttribute('ExportPath', FTree.ExportPath);
 
      //Save elements
 
