@@ -18,12 +18,14 @@ type
         FCurrentNode : TNodeData;
       public
         procedure AddClass(Name : String);
+        procedure AddAttribute(Node : TNodeData; Name : String);
         procedure Refresh();
         procedure UpdateModelProperties(Name: String; ObserverCode : boolean; PersistanceCode: boolean);
         procedure UpdateClassProperties(NameOfClass: String; ClassPersist : boolean);
         procedure UpdateAttrProperties(AttrName: String; AttrType: String; AttrPersist: boolean; AttrList: boolean);
         procedure SaveFile(FileName: String);
         procedure LoadFile(FileName: String);
+        procedure DeleteElement(Data: TNodeData);
         constructor Create(Data: TDataTree; Observer : IObserver);
         property CurrentNode: TNodeData read FCurrentNode write FCurrentNode;
     end;
@@ -42,6 +44,18 @@ begin
      current.Name:=Name;
      FTree.Classes.Add(current);
      Refresh;
+end;
+
+procedure TController.AddAttribute(Node : TNodeData; Name: String);
+var
+   Attr : TNodeData;
+begin
+     Attr:= TNodeData.Create();
+     Attr.ElementType:= _Attribute;
+     Attr.Name:= Name;
+
+     Node.Children.Add(Attr);
+     Refresh();
 end;
 
 procedure TController.Refresh;
@@ -86,6 +100,7 @@ procedure TController.SaveFile(FileName: String);
 var
    Doc: TXMLDocument;
    RootNode, MetaNode, ModelNode: TDOMNode;
+   i,j : integer;
 begin
      Doc:= TXMLDocument.Create();
 
@@ -106,15 +121,29 @@ begin
      TDomElement(ModelNode).SetAttribute('ExportPath', FTree.ExportPath);
 
      //Save elements
+     for i:= 0 to Ftree.Classes.Count - 1 do begin
+
+     end;
 
      RootNode:= Doc.DocumentElement;
-
      WriteXMLFile(Doc, FileName);
 end;
 
 procedure TController.LoadFile(FileName: String);
 begin
 
+end;
+
+procedure TController.DeleteElement(Data: TNodeData);
+var I : Integer                            ;
+begin
+     if Data.ElementType = _Class then begin
+        FTree.Classes.Remove(Data);
+     end;
+
+     Data.Parent:= nil;
+     Data:= nil;
+     Refresh();
 end;
 
 constructor TController.Create(Data: TDataTree; Observer : IObserver);

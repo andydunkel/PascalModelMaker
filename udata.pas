@@ -57,6 +57,7 @@ type
     FGenerateObserverCode : boolean;
     FPersistanceCode : boolean;
     FExportPath : String;
+    FTemplate : String;
   public
     constructor Create();
   published
@@ -67,6 +68,7 @@ type
     property ExportPath : String read FExportPath write FExportPath;
     property GenerateObserverCode : boolean read FGenerateObserverCode write FGenerateObserverCode;
     property PersistanceCode : boolean read FPersistanceCode write FPersistanceCode;
+    property Template : String read FTemplate write FTemplate;
 end;
 
 implementation
@@ -88,6 +90,7 @@ begin
      Self.GenerateObserverCode:=true;
      Self.PersistanceCode:=false;
      FClasses:= TChildList.Create(true);
+     FClasses.FreeObjects:= true;
 end;
 
 end.

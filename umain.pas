@@ -58,11 +58,13 @@ type
     Splitter: TSplitter;
     StatusBar: TStatusBar;
     Output: TSynEdit;
+    SynEditTemplate: TSynEdit;
     SynPasSyn: TSynPasSyn;
     TabPropAttr: TTabSheet;
     TabPropClass: TTabSheet;
     TabPropModel: TTabSheet;
     Empty: TTabSheet;
+    Template: TTabSheet;
     TabSheetModel: TTabSheet;
     TabSheetOutput: TTabSheet;
     ToolBar: TToolBar;
@@ -78,6 +80,7 @@ type
     TreeViewModel: TTreeView;
     procedure actDeleteItemExecute(Sender: TObject);
     procedure actExitExecute(Sender: TObject);
+    procedure actNewAttributeExecute(Sender: TObject);
     procedure actNewClassExecute(Sender: TObject);
     procedure actSaveExecute(Sender: TObject);
     procedure ButtonSetExportPathClick(Sender: TObject);
@@ -125,9 +128,24 @@ begin
   Application.Terminate;
 end;
 
-procedure TFormMain.actDeleteItemExecute(Sender: TObject);
+procedure TFormMain.actNewAttributeExecute(Sender: TObject);
+var
+  Data : TNodeData;
 begin
-  ShowMessage('Delete');
+     if TreeViewModel.Selected <> nil then begin
+       Data:= GetNodeElement(TreeViewModel.Selected);
+       Controller.AddAttribute(Data, 'NewAttr');
+     end;
+end;
+
+procedure TFormMain.actDeleteItemExecute(Sender: TObject);
+var
+  Data : TNodeData;
+begin
+     if TreeViewModel.Selected <> nil then begin
+       Data:= GetNodeElement(TreeViewModel.Selected);
+       Controller.DeleteElement(Data);
+     end;
 end;
 
 procedure TFormMain.actNewClassExecute(Sender: TObject);
@@ -230,6 +248,7 @@ begin
   CheckBoxObserver.Checked:= TreeData.GenerateObserverCode;
   CheckBoxPersistence.Checked:= TreeData.PersistanceCode;
   actDeleteItem.Enabled:= false;
+  actNewAttriBute.Enabled:= false;
 end;
 
 procedure TFormMain.HandleEnablementClass();
@@ -253,14 +272,14 @@ begin
      ComboBoxAttrType.Text:= Controller.CurrentNode.DataType;
      CheckBoxAttrPersist.Checked:= Controller.CurrentNode.Persist;
      CheckBoxAttrList.Checked:= Controller.CurrentNode.List;
-     actDeleteItem.Enabled:= false;
+     actDeleteItem.Enabled:= true;
 end;
 
 
 procedure TFormMain.Refresh;
 var
-   nodeRoot, subNode : TTreeNode;
-   i : integer;
+   nodeRoot, subNode, attrNode : TTreeNode;
+   i,j : integer;
 begin
      //Root
      TreeViewModel.Items.Clear;
@@ -274,9 +293,15 @@ begin
          subNode.ImageIndex:= 1;
          subNode.SelectedIndex:= subNode.ImageIndex;
          subNode.Data:=Pointer(TreeData.Classes[i]);
-     end;
 
-     //Attributes
+         //Attributes
+         for j:= 0 to TreeData.Classes[i].Children.Count - 1 do begin
+             attrNode:= TreeViewModel.Items.AddChild(subNode, TreeData.Classes[i].Children[j].Name);
+             attrNode.ImageIndex:= 2;
+             attrNode.SelectedIndex:= attrNode.ImageIndex;
+             attrNode.Data:=Pointer(TreeData.Classes[i].Children[j]);
+         end;
+     end;
 
      TreeViewModel.FullExpand;
 end;
