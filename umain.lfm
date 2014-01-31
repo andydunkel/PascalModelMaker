@@ -114,9 +114,9 @@ object FormMain: TFormMain
         Height = 493
         Top = 0
         Width = 332
-        ActivePage = TabPropClass
+        ActivePage = TabPropAttr
         Align = alClient
-        TabIndex = 2
+        TabIndex = 3
         TabOrder = 2
         OnChange = PageControlPropertiesChange
         object Empty: TTabSheet

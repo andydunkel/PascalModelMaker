@@ -5,7 +5,7 @@ unit Controller;
 interface
 
 uses
-  Classes, SysUtils, uData, uConsts, XMLWrite, DOM;
+  Classes, SysUtils, uData, uConsts, XMLWrite, DOM, XMLHelper;
 
 type
 
@@ -99,31 +99,52 @@ end;
 procedure TController.SaveFile(FileName: String);
 var
    Doc: TXMLDocument;
-   RootNode, MetaNode, ModelNode: TDOMNode;
+   RootNode, MetaNode, ModelNode, ClassesNode,
+     AttrNode, TempNodeClass, TempNodeAttr: TDOMNode;
    i,j : integer;
 begin
      Doc:= TXMLDocument.Create();
 
-     RootNode:= Doc.CreateElement('Content');
+     RootNode:= TXMLHelper.CreateXmlNode(Doc, 'Content');
      Doc.AppendChild(RootNode);
 
      //Create meta information
-     MetaNode:= Doc.CreateElement('Meta');
+     MetaNode:= TXMLHelper.CreateXmlNode(Doc, 'Meta');
      TDOMElement(MetaNode).SetAttribute('Version', '1');
      RootNode.AppendChild(MetaNode);
 
      //Save model
-     ModelNode:= Doc.CreateElement('model');
+     ModelNode:= TXMLHelper.CreateXmlNode(Doc, 'model');
      TDomElement(ModelNode).SetAttribute('UnitName', FTree.UnitName);
      TDomElement(ModelNode).SetAttribute('GenerateObserverCode', BoolToStr(FTree.GenerateObserverCode));
      TDomElement(ModelNode).SetAttribute('PersistanceCode', BoolToStr(FTree.PersistanceCode));
      TDomElement(ModelNode).SetAttribute('UnitName', FTree.UnitName);
      TDomElement(ModelNode).SetAttribute('ExportPath', FTree.ExportPath);
+     RootNode.AppendChild(ModelNode);
+
+     ClassesNode:= TXMLHelper.CreateXmlNode(Doc, 'Classes');
 
      //Save elements
-     for i:= 0 to Ftree.Classes.Count - 1 do begin
+     for i:= 0 to FTree.Classes.Count - 1 do begin
+         TempNodeClass:= TXMLHelper.CreateXmlNode(Doc, 'Class');
+         TXMLHelper.CreateXmlNode(Doc, TempNodeClass, 'Name', FTree.Classes[i].Name);
+         TXMLHelper.CreateXmlNode(Doc, TempNodeClass, 'Persist', BoolToStr(FTree.Classes[i].Persist));
 
+         AttrNode:= TXMLHelper.CreateXmlNode(Doc, 'Attributes');
+         //Save attributes
+         for j:= 0 to FTree.Classes[i].Children.Count - 1 do begin;
+             TempNodeAttr:= TXMLHelper.CreateXmlNode(Doc, 'Attr');
+             TXMLHelper.CreateXmlNode(Doc, TempNodeAttr, 'Name', FTree.Classes[i].Children[j].Name);
+             TXMLHelper.CreateXmlNode(Doc, TempNodeAttr, 'ElementType', IntToStr(Ord(FTree.Classes[i].Children[j].ElementType)));
+             TXMLHelper.CreateXmlNode(Doc, TempNodeAttr, 'Persist', BoolToStr(FTree.Classes[i].Children[j].Persist));
+             TXMLHelper.CreateXmlNode(Doc, TempNodeAttr, 'List', BoolToStr(FTree.Classes[i].Children[j].List));
+             AttrNode.AppendChild(TempNodeAttr);
+         end;
+
+         ClassesNode.AppendChild(TempNodeClass);
      end;
+
+     ModelNode.AppendChild(ClassesNode);
 
      RootNode:= Doc.DocumentElement;
      WriteXMLFile(Doc, FileName);
