@@ -118,7 +118,6 @@ object FormMain: TFormMain
         Align = alClient
         TabIndex = 3
         TabOrder = 2
-        OnChange = PageControlPropertiesChange
         object Empty: TTabSheet
           Caption = 'Empty'
         end
@@ -1697,6 +1696,7 @@ object FormMain: TFormMain
       Category = 'File'
       Caption = '&Open'
       ImageIndex = 8
+      OnExecute = actOpenExecute
     end
     object actSave: TAction
       Category = 'File'
@@ -1856,14 +1856,14 @@ object FormMain: TFormMain
   end
   object OpenModelDialog: TOpenDialog
     DefaultExt = '.delphimodel'
-    Filter = 'Delphi Model File (*.delphimodel)|.delphimodel|All files (*.*)|.'
+    Filter = 'Delphi Model File (*.delphimodel)|*.delphimodel|All files (*.*)|*.*'
     left = 199
     top = 275
   end
   object SaveDialogModel: TSaveDialog
-    DefaultExt = '.delphimodel'
+    DefaultExt = '.*.delphimodel'
     FileName = 'model.delphimodel'
-    Filter = 'Delphi Model File (*.delphimodel)|.delphimodel|All files (*.*)|.'
+    Filter = 'Delphi Model File (*.delphimodel)|*.delphimodel|All files (*.*)|*.*'
     left = 88
     top = 275
   end
