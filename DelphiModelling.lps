@@ -9,7 +9,7 @@
         <Filename Value="DelphiModelling.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="DelphiModelling"/>
-        <UsageCount Value="103"/>
+        <UsageCount Value="107"/>
       </Unit0>
       <Unit1>
         <Filename Value="umain.pas"/>
@@ -18,11 +18,12 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="221"/>
-        <CursorPos X="69" Y="236"/>
-        <UsageCount Value="103"/>
+        <TopLine Value="199"/>
+        <CursorPos X="34" Y="218"/>
+        <UsageCount Value="107"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -34,19 +35,18 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="36" Y="18"/>
-        <UsageCount Value="99"/>
+        <UsageCount Value="103"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="udata.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uData"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="16"/>
-        <CursorPos X="35" Y="19"/>
-        <UsageCount Value="99"/>
+        <TopLine Value="66"/>
+        <CursorPos X="22" Y="34"/>
+        <UsageCount Value="103"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -56,9 +56,9 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="165"/>
-        <CursorPos X="23" Y="185"/>
-        <UsageCount Value="91"/>
+        <TopLine Value="171"/>
+        <CursorPos X="29" Y="191"/>
+        <UsageCount Value="95"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -69,7 +69,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
-        <UsageCount Value="76"/>
+        <UsageCount Value="80"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
@@ -80,7 +80,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="14"/>
         <CursorPos X="32" Y="22"/>
-        <UsageCount Value="57"/>
+        <UsageCount Value="61"/>
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
@@ -93,7 +93,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="25"/>
         <CursorPos X="60" Y="29"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="58"/>
       </Unit7>
       <Unit8>
         <Filename Value="C:\lazarus\lcl\controls.pp"/>
@@ -105,142 +105,155 @@
       </Unit8>
     </Units>
     <General>
-      <ActiveWindowIndexAtStart Value="0"/>
+      <ActiveWindowIndexAtStart Value="1"/>
     </General>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="controller.pas"/>
-        <Caret Line="136" Column="128" TopLine="113"/>
+        <Filename Value="umain.pas"/>
+        <Caret Line="236" Column="69" TopLine="221"/>
       </Position1>
       <Position2>
         <Filename Value="umain.pas"/>
-        <Caret Line="186" Column="1" TopLine="177"/>
+        <Caret Line="207" Column="6" TopLine="205"/>
       </Position2>
       <Position3>
-        <Filename Value="umain.pas"/>
-        <Caret Line="89" Column="15" TopLine="76"/>
+        <Filename Value="controller.pas"/>
+        <Caret Line="188" Column="42" TopLine="163"/>
       </Position3>
       <Position4>
         <Filename Value="controller.pas"/>
-        <Caret Line="34" Column="24" TopLine="5"/>
+        <Caret Line="202" Column="59" TopLine="186"/>
       </Position4>
       <Position5>
         <Filename Value="controller.pas"/>
-        <Caret Line="161" Column="22" TopLine="144"/>
+        <Caret Line="205" Column="42" TopLine="187"/>
       </Position5>
       <Position6>
         <Filename Value="controller.pas"/>
-        <Caret Line="159" Column="26" TopLine="138"/>
+        <Caret Line="207" Column="30" TopLine="183"/>
       </Position6>
       <Position7>
         <Filename Value="controller.pas"/>
-        <Caret Line="183" Column="15" TopLine="159"/>
+        <Caret Line="185" Column="1" TopLine="178"/>
       </Position7>
       <Position8>
-        <Filename Value="umain.pas"/>
-        <Caret Line="89" Column="1" TopLine="76"/>
+        <Filename Value="controller.pas"/>
+        <Caret Line="188" Column="1" TopLine="178"/>
       </Position8>
       <Position9>
-        <Filename Value="umain.pas"/>
-        <Caret Line="162" Column="6" TopLine="154"/>
+        <Filename Value="controller.pas"/>
+        <Caret Line="204" Column="42" TopLine="178"/>
       </Position9>
       <Position10>
         <Filename Value="controller.pas"/>
-        <Caret Line="182" Column="18" TopLine="165"/>
+        <Caret Line="190" Column="1" TopLine="178"/>
       </Position10>
       <Position11>
         <Filename Value="controller.pas"/>
-        <Caret Line="37" Column="44" TopLine="20"/>
+        <Caret Line="191" Column="1" TopLine="178"/>
       </Position11>
       <Position12>
         <Filename Value="controller.pas"/>
-        <Caret Line="48" Column="36" TopLine="31"/>
+        <Caret Line="194" Column="10" TopLine="178"/>
       </Position12>
       <Position13>
-        <Filename Value="umain.pas"/>
-        <Caret Line="158" Column="31" TopLine="143"/>
+        <Filename Value="controller.pas"/>
+        <Caret Line="192" Column="21" TopLine="178"/>
       </Position13>
       <Position14>
-        <Filename Value="umain.pas"/>
-        <Caret Line="161" Column="21" TopLine="144"/>
+        <Filename Value="controller.pas"/>
+        <Caret Line="188" Column="1" TopLine="178"/>
       </Position14>
       <Position15>
         <Filename Value="controller.pas"/>
-        <Caret Line="177" Column="51" TopLine="172"/>
+        <Caret Line="189" Column="1" TopLine="178"/>
       </Position15>
       <Position16>
         <Filename Value="controller.pas"/>
-        <Caret Line="181" Column="62" TopLine="172"/>
+        <Caret Line="190" Column="1" TopLine="178"/>
       </Position16>
       <Position17>
         <Filename Value="controller.pas"/>
-        <Caret Line="182" Column="1" TopLine="172"/>
+        <Caret Line="191" Column="1" TopLine="178"/>
       </Position17>
       <Position18>
-        <Filename Value="umain.pas"/>
-        <Caret Line="158" Column="58" TopLine="84"/>
+        <Filename Value="controller.pas"/>
+        <Caret Line="194" Column="1" TopLine="178"/>
       </Position18>
       <Position19>
-        <Filename Value="umain.pas"/>
-        <Caret Line="178" Column="12" TopLine="14"/>
+        <Filename Value="controller.pas"/>
+        <Caret Line="184" Column="37" TopLine="171"/>
       </Position19>
       <Position20>
-        <Filename Value="umain.pas"/>
-        <Caret Line="179" Column="46" TopLine="153"/>
+        <Filename Value="controller.pas"/>
+        <Caret Line="191" Column="29" TopLine="171"/>
       </Position20>
       <Position21>
-        <Filename Value="umain.pas"/>
-        <Caret Line="246" Column="31" TopLine="220"/>
+        <Filename Value="controller.pas"/>
+        <Caret Line="188" Column="1" TopLine="171"/>
       </Position21>
       <Position22>
-        <Filename Value="umain.pas"/>
-        <Caret Line="247" Column="38" TopLine="221"/>
+        <Filename Value="controller.pas"/>
+        <Caret Line="189" Column="1" TopLine="171"/>
       </Position22>
       <Position23>
-        <Filename Value="umain.pas"/>
-        <Caret Line="248" Column="41" TopLine="222"/>
+        <Filename Value="controller.pas"/>
+        <Caret Line="190" Column="1" TopLine="171"/>
       </Position23>
       <Position24>
-        <Filename Value="umain.pas"/>
-        <Caret Line="270" Column="31" TopLine="252"/>
+        <Filename Value="controller.pas"/>
+        <Caret Line="191" Column="1" TopLine="171"/>
       </Position24>
       <Position25>
-        <Filename Value="umain.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Filename Value="controller.pas"/>
+        <Caret Line="194" Column="1" TopLine="171"/>
       </Position25>
       <Position26>
-        <Filename Value="umain.pas"/>
-        <Caret Line="96" Column="13" TopLine="71"/>
+        <Filename Value="controller.pas"/>
+        <Caret Line="196" Column="1" TopLine="171"/>
       </Position26>
       <Position27>
-        <Filename Value="umain.pas"/>
-        <Caret Line="178" Column="14" TopLine="152"/>
+        <Filename Value="controller.pas"/>
+        <Caret Line="203" Column="54" TopLine="171"/>
       </Position27>
       <Position28>
-        <Filename Value="umain.pas"/>
-        <Caret Line="179" Column="46" TopLine="153"/>
+        <Filename Value="controller.pas"/>
+        <Caret Line="198" Column="1" TopLine="171"/>
       </Position28>
       <Position29>
-        <Filename Value="umain.pas"/>
-        <Caret Line="239" Column="31" TopLine="220"/>
+        <Filename Value="controller.pas"/>
+        <Caret Line="199" Column="1" TopLine="171"/>
       </Position29>
       <Position30>
-        <Filename Value="umain.pas"/>
-        <Caret Line="189" Column="22" TopLine="165"/>
+        <Filename Value="controller.pas"/>
+        <Caret Line="194" Column="27" TopLine="171"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>
   <Debugging>
-    <Watches Count="3">
+    <BreakPoints Count="2">
       <Item1>
-        <Expression Value="Data"/>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="controller.pas"/>
+        <Line Value="185"/>
       </Item1>
       <Item2>
-        <Expression Value="TreeData"/>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="controller.pas"/>
+        <Line Value="199"/>
       </Item2>
-      <Item3>
-        <Expression Value="TreeData.Classes"/>
-      </Item3>
+    </BreakPoints>
+    <Watches Count="2">
+      <Item1>
+        <Expression Value="FTree"/>
+      </Item1>
+      <Item2>
+        <Expression Value="Clasz"/>
+      </Item2>
     </Watches>
   </Debugging>
 </CONFIG>

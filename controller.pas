@@ -159,6 +159,7 @@ begin
              AttrNode.AppendChild(TempNodeAttr);
          end;
 
+         TempNodeClass.AppendChild(AttrNode);
          ClassesNode.AppendChild(TempNodeClass);
      end;
 
@@ -173,6 +174,7 @@ var
    Doc: TXMLDocument;
    RootNode, MetaNode, ModelNode, ClassesNode,
      AttrNode, TempNodeClass, TempNodeAttr: TDOMNode;
+   Clasz, Attr: TNodeData;
    i,j : integer;
    Value: String;
 begin
@@ -189,11 +191,26 @@ begin
      FTree.GenerateObserverCode:= StrToBool(TDOMElement(ModelNode).GetAttribute(ATTR_GENERATEOBSERVERCODE));
 
      //read classes
-     ClassesNode:= Doc.DocumentElement.FindNode(NODE_CLASSES);
+     ClassesNode:= ModelNode.FindNode(NODE_CLASSES);
 
      for i:= 0 to ClassesNode.ChildNodes.Count - 1 do begin
          TempNodeClass:= ClassesNode.ChildNodes[i];
+         Clasz:= TNodeData.Create();
+         Clasz.Name:= TempNodeClass.FindNode(NODE_NAME).NodeValue;
+         Clasz.Persist:= StrToBool(TempNodeClass.FindNode(NODE_PERSIST).NodeValue);
+         Ftree.Classes.Add(Clasz);
+         //read attributes
+         AttrNode:= TempNodeClass.FindNode(NODE_ATTRIBUTES);
 
+         for j:= 0 to AttrNode.ChildNodes.Count - 1 do begin
+             TempNodeAttr:= AttrNode.ChildNodes[j];
+             Attr:= TNodeData.Create();
+             Attr.Name:= TempNodeAttr.FindNode(NODE_NAME).NodeValue;
+             Attr.ElementType:= TElementType(StrToInt(TempNodeAttr.FindNode(NODE_ELEMENTTYPE).NodeValue));
+             Attr.Persist:= StrToBool(TempNodeAttr.FindNode(NODE_PERSIST).NodeValue);
+             Attr.List:= StrToBool(TempNodeAttr.FindNode(NODE_List).NodeValue);
+             Clasz.Children.Add(Attr);
+         end;
      end;
 
 end;
