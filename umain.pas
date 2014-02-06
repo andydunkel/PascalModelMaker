@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, SynHighlighterPas, SynEdit, Forms, Controls,
   Graphics, Dialogs, ComCtrls, ExtCtrls, StdCtrls, Menus, ActnList, uData,
-  Controller, uConsts, AboutDialog;
+  Controller, uConsts, AboutDialog, Generator;
 
 type
 
@@ -82,6 +82,7 @@ type
     procedure actExitExecute(Sender: TObject);
     procedure actNewAttributeExecute(Sender: TObject);
     procedure actNewClassExecute(Sender: TObject);
+    procedure actNewExecute(Sender: TObject);
     procedure actOpenExecute(Sender: TObject);
     procedure actSaveExecute(Sender: TObject);
     procedure ButtonSetExportPathClick(Sender: TObject);
@@ -104,6 +105,7 @@ type
   public
     { public declarations }
     procedure Refresh();
+    procedure SetData(Data: TDataTree);
   end;
 
 const
@@ -152,11 +154,15 @@ begin
      Controller.AddClass('NewClass');
 end;
 
+procedure TFormMain.actNewExecute(Sender: TObject);
+begin
+     Controller.NewFile();
+end;
+
 procedure TFormMain.actOpenExecute(Sender: TObject);
 begin
      if OpenModelDialog.Execute then begin;
         Controller.LoadFile(OpenModelDialog.FileName);
-        Self.TreeData:= Controller.Tree;
      end;
 end;
 
@@ -304,6 +310,12 @@ begin
      end;
 
      TreeViewModel.FullExpand;
+     SynEditTemplate.Text:= TGenerator.GenerateClassCode(TreeData);
+end;
+
+procedure TFormMain.SetData(Data: TDataTree);
+begin
+  Self.TreeData:= Data;
 end;
 
 

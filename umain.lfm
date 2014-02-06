@@ -1691,6 +1691,7 @@ object FormMain: TFormMain
       Category = 'File'
       Caption = '&New'
       ImageIndex = 9
+      OnExecute = actNewExecute
     end
     object actOpen: TAction
       Category = 'File'

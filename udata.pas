@@ -8,16 +8,16 @@ uses
   Classes, SysUtils, uConsts, fgl;
 
 type
+     TDataTree = class; //forward declarationa
     IObserver = interface(IInterface)
       procedure Refresh();
+      procedure SetData(Data: TDataTree);
     end;
 
 type
 
     { TNodeData }
-
     TNodeData = class;  //forward declaration
-    TDataTree = class; //forward declaration
     TChildList = specialize TFPGObjectList<TNodeData>;
     TNodeData = class
     protected

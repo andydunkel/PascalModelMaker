@@ -8,7 +8,6 @@ uses
   Classes, SysUtils, uData, uConsts, XMLWrite, XMLRead, DOM, XMLHelper;
 
 type
-
     { TController }
 
     TController = class
@@ -19,16 +18,19 @@ type
       public
         procedure AddClass(Name : String);
         procedure AddAttribute(Node : TNodeData; Name : String);
-        procedure Refresh();
+        procedure Refresh(UpdateData: boolean);
         procedure UpdateModelProperties(Name: String; ObserverCode : boolean; PersistanceCode: boolean);
         procedure UpdateClassProperties(NameOfClass: String; ClassPersist : boolean);
         procedure UpdateAttrProperties(AttrName: String; AttrType: String; AttrPersist: boolean; AttrList: boolean);
         procedure SaveFile(FileName: String);
         procedure LoadFile(FileName: String);
+        procedure NewFile();
         procedure DeleteElement(Data: TNodeData);
         constructor Create(Data: TDataTree; Observer : IObserver);
         property CurrentNode: TNodeData read FCurrentNode write FCurrentNode;
         property Tree: TDataTree read FTree write FTree;
+      private
+        procedure LoadTemplate();
     end;
 
 const
@@ -61,7 +63,7 @@ begin
      current.ElementType:= _Class;
      current.Name:=Name;
      FTree.Classes.Add(current);
-     Refresh;
+     Refresh(false);
 end;
 
 procedure TController.AddAttribute(Node : TNodeData; Name: String);
@@ -73,12 +75,16 @@ begin
      Attr.Name:= Name;
 
      Node.Children.Add(Attr);
-     Refresh();
+     Refresh(false);
 end;
 
-procedure TController.Refresh;
+procedure TController.Refresh(UpdateData: boolean);
 begin
      if FObserver <> nil then begin
+       if UpdateData then begin
+          FObserver.SetData(FTree);
+       end;
+
        FObserver.Refresh();
      end;
 end;
@@ -100,7 +106,7 @@ begin
           Persist:= ClassPersist;
      end;
 
-     Refresh();
+     Refresh(false);
 end;
 
 procedure TController.UpdateAttrProperties(AttrName: String; AttrType: String;
@@ -196,8 +202,9 @@ begin
      for i:= 0 to ClassesNode.ChildNodes.Count - 1 do begin
          TempNodeClass:= ClassesNode.ChildNodes[i];
          Clasz:= TNodeData.Create();
-         Clasz.Name:= TempNodeClass.FindNode(NODE_NAME).NodeValue;
-         Clasz.Persist:= StrToBool(TempNodeClass.FindNode(NODE_PERSIST).NodeValue);
+         Clasz.Name:= TempNodeClass.FindNode(NODE_NAME).FirstChild.NodeValue;
+         Clasz.Persist:= StrToBool(TempNodeClass.FindNode(NODE_PERSIST).FirstChild.NodeValue);
+         Clasz.ElementType:= TElementType._Class;
          Ftree.Classes.Add(Clasz);
          //read attributes
          AttrNode:= TempNodeClass.FindNode(NODE_ATTRIBUTES);
@@ -205,14 +212,24 @@ begin
          for j:= 0 to AttrNode.ChildNodes.Count - 1 do begin
              TempNodeAttr:= AttrNode.ChildNodes[j];
              Attr:= TNodeData.Create();
-             Attr.Name:= TempNodeAttr.FindNode(NODE_NAME).NodeValue;
-             Attr.ElementType:= TElementType(StrToInt(TempNodeAttr.FindNode(NODE_ELEMENTTYPE).NodeValue));
-             Attr.Persist:= StrToBool(TempNodeAttr.FindNode(NODE_PERSIST).NodeValue);
-             Attr.List:= StrToBool(TempNodeAttr.FindNode(NODE_List).NodeValue);
+             Attr.Name:= TempNodeAttr.FindNode(NODE_NAME).FirstChild.NodeValue;
+             Attr.ElementType:= TElementType(StrToInt(TempNodeAttr.FindNode(NODE_ELEMENTTYPE).FirstChild.NodeValue));
+             Attr.Persist:= StrToBool(TempNodeAttr.FindNode(NODE_PERSIST).FirstChild.NodeValue);
+             Attr.List:= StrToBool(TempNodeAttr.FindNode(NODE_List).FirstChild.NodeValue);
+             Attr.ElementType:= TElementType._Attribute;
              Clasz.Children.Add(Attr);
          end;
      end;
 
+     Refresh(true);
+end;
+
+procedure TController.NewFile;
+begin
+     //creates a new file
+     FTree:= TDataTree.Create();
+     LoadTemplate();
+     Refresh(true);
 end;
 
 procedure TController.DeleteElement(Data: TNodeData);
@@ -224,14 +241,26 @@ begin
 
      Data.Parent:= nil;
      Data:= nil;
-     Refresh();
+     Refresh(false);
 end;
 
 constructor TController.Create(Data: TDataTree; Observer : IObserver);
 begin
      FTree := Data;
      FObserver := Observer;
-     Refresh();
+     LoadTemplate();
+     Refresh(true);
+end;
+
+procedure TController.LoadTemplate;
+var
+   Content: TStringList;
+   FileName: String;
+begin
+   Content:= TStringList.Create();
+   FileName:= ExtractFilePath(ParamStr(0)) + 'template.pas';
+   Content.LoadFromFile(FileName);
+   FTree.Template:= Content.Text;
 end;
 
 end.
