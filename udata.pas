@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, uConsts, fgl;
 
 type
-     TDataTree = class; //forward declarationa
+    TDataTree = class; //forward declarationa
     IObserver = interface(IInterface)
       procedure Refresh();
       procedure SetData(Data: TDataTree);
