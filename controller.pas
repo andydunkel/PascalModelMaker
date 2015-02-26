@@ -47,6 +47,7 @@ const
   NODE_NAME = 'Name';
   NODE_PERSIST = 'Persist';
   NODE_ATTRIBUTES = 'Attributes';
+  NODE_DATA_TYPE = 'DataType';
   NODE_ATTR = 'Attr';
   NODE_ELEMENTTYPE = 'ElementType';
   NODE_LIST = 'List';
@@ -161,6 +162,7 @@ begin
              TXMLHelper.CreateXmlNode(Doc, TempNodeAttr, NODE_NAME, FTree.Classes[i].Children[j].Name);
              TXMLHelper.CreateXmlNode(Doc, TempNodeAttr, NODE_ELEMENTTYPE, IntToStr(Ord(FTree.Classes[i].Children[j].ElementType)));
              TXMLHelper.CreateXmlNode(Doc, TempNodeAttr, NODE_PERSIST, BoolToStr(FTree.Classes[i].Children[j].Persist));
+             TXMLHelper.CreateXmlNode(Doc, TempNodeAttr, NODE_DATA_TYPE, FTree.Classes[i].Children[j].DataType);
              TXMLHelper.CreateXmlNode(Doc, TempNodeAttr, NODE_LIST, BoolToStr(FTree.Classes[i].Children[j].List));
              AttrNode.AppendChild(TempNodeAttr);
          end;
@@ -215,8 +217,9 @@ begin
              Attr.Name:= TempNodeAttr.FindNode(NODE_NAME).FirstChild.NodeValue;
              Attr.ElementType:= TElementType(StrToInt(TempNodeAttr.FindNode(NODE_ELEMENTTYPE).FirstChild.NodeValue));
              Attr.Persist:= StrToBool(TempNodeAttr.FindNode(NODE_PERSIST).FirstChild.NodeValue);
-             Attr.List:= StrToBool(TempNodeAttr.FindNode(NODE_List).FirstChild.NodeValue);
+             Attr.List:= StrToBool(TempNodeAttr.FindNode(NODE_LIST).FirstChild.NodeValue);
              Attr.ElementType:= TElementType._Attribute;
+             Attr.DataType:= TempNodeAttr.FindNode(NODE_DATA_TYPE).FirstChild.NodeValue;
              Clasz.Children.Add(Attr);
          end;
      end;
