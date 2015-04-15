@@ -1,6 +1,6 @@
-# DelphiModelMaker ##
+# PascalModelMaker ##
 
-Model Generator for Delphi
+Model Generator for FreePascal / Delphi / Lazarus
 
 ## Status ##
 

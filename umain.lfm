@@ -1,15 +1,15 @@
 object FormMain: TFormMain
-  Left = 308
+  Left = 416
   Height = 590
-  Top = 134
+  Top = 151
   Width = 869
   Caption = 'DelphiModelMaker'
-  ClientHeight = 570
+  ClientHeight = 571
   ClientWidth = 869
   Menu = MainMenu
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '1.2.6.0'
+  LCLVersion = '1.4.0.2'
   object ToolBar: TToolBar
     Left = 0
     Height = 26
@@ -35,6 +35,7 @@ object FormMain: TFormMain
     end
     object ToolButton1: TToolButton
       Left = 70
+      Height = 22
       Top = 2
       Width = 10
       Caption = 'ToolButton1'
@@ -58,6 +59,7 @@ object FormMain: TFormMain
     end
     object ToolButton4: TToolButton
       Left = 149
+      Height = 22
       Top = 2
       Width = 10
       Caption = 'ToolButton4'
@@ -72,14 +74,14 @@ object FormMain: TFormMain
   end
   object StatusBar: TStatusBar
     Left = 0
-    Height = 23
-    Top = 547
+    Height = 20
+    Top = 551
     Width = 869
     Panels = <>
   end
   object PageControl: TPageControl
     Left = 0
-    Height = 521
+    Height = 525
     Top = 26
     Width = 869
     ActivePage = TabSheetModel
@@ -88,11 +90,11 @@ object FormMain: TFormMain
     TabOrder = 2
     object TabSheetModel: TTabSheet
       Caption = 'Model'
-      ClientHeight = 493
+      ClientHeight = 497
       ClientWidth = 861
       object TreeViewModel: TTreeView
         Left = 0
-        Height = 493
+        Height = 497
         Top = 0
         Width = 524
         Align = alLeft
@@ -105,13 +107,13 @@ object FormMain: TFormMain
       end
       object Splitter: TSplitter
         Left = 524
-        Height = 493
+        Height = 497
         Top = 0
         Width = 5
       end
       object PageControlProperties: TPageControl
         Left = 529
-        Height = 493
+        Height = 497
         Top = 0
         Width = 332
         ActivePage = TabPropAttr
@@ -226,13 +228,13 @@ object FormMain: TFormMain
         end
         object TabPropAttr: TTabSheet
           Caption = 'Attribute Properties'
-          ClientHeight = 465
+          ClientHeight = 469
           ClientWidth = 324
           object LabelAttrName: TLabel
             Left = 7
             Height = 15
             Top = 16
-            Width = 32
+            Width = 28
             Caption = 'Name'
             ParentColor = False
           end
@@ -240,7 +242,7 @@ object FormMain: TFormMain
             Left = 7
             Height = 15
             Top = 48
-            Width = 26
+            Width = 28
             Caption = 'Type'
             ParentColor = False
           end
@@ -275,7 +277,7 @@ object FormMain: TFormMain
             Left = 79
             Height = 19
             Top = 78
-            Width = 54
+            Width = 69
             Caption = 'Persist'
             Checked = True
             OnChange = UpdateAttrProperties
@@ -286,7 +288,7 @@ object FormMain: TFormMain
             Left = 79
             Height = 19
             Top = 102
-            Width = 38
+            Width = 48
             Caption = 'List'
             OnChange = UpdateAttrProperties
             TabOrder = 3
@@ -296,11 +298,11 @@ object FormMain: TFormMain
     end
     object Template: TTabSheet
       Caption = 'Template'
-      ClientHeight = 493
+      ClientHeight = 497
       ClientWidth = 861
       inline SynEditTemplate: TSynEdit
         Left = 0
-        Height = 493
+        Height = 497
         Top = 0
         Width = 861
         Align = alClient
@@ -744,7 +746,6 @@ object FormMain: TFormMain
           'SynEditTemplate'
         )
         VisibleSpecialChars = [vscSpace, vscTabAtLast]
-        SelectedColor.FrameEdges = sfeAround
         SelectedColor.BackPriority = 50
         SelectedColor.ForePriority = 50
         SelectedColor.FramePriority = 50
@@ -752,23 +753,17 @@ object FormMain: TFormMain
         SelectedColor.ItalicPriority = 50
         SelectedColor.UnderlinePriority = 50
         SelectedColor.StrikeOutPriority = 50
-        IncrementColor.FrameEdges = sfeAround
-        HighlightAllColor.FrameEdges = sfeAround
         BracketHighlightStyle = sbhsBoth
         BracketMatchColor.Background = clNone
         BracketMatchColor.Foreground = clNone
-        BracketMatchColor.FrameEdges = sfeAround
         BracketMatchColor.Style = [fsBold]
         FoldedCodeColor.Background = clNone
         FoldedCodeColor.Foreground = clGray
         FoldedCodeColor.FrameColor = clGray
-        FoldedCodeColor.FrameEdges = sfeAround
         MouseLinkColor.Background = clNone
         MouseLinkColor.Foreground = clBlue
-        MouseLinkColor.FrameEdges = sfeAround
         LineHighlightColor.Background = clNone
         LineHighlightColor.Foreground = clNone
-        LineHighlightColor.FrameEdges = sfeAround
         inline SynLeftGutterPartList1: TSynGutterPartList
           object SynGutterMarks1: TSynGutterMarks
             Width = 24
@@ -779,7 +774,6 @@ object FormMain: TFormMain
             MouseActions = <>
             MarkupInfo.Background = clBtnFace
             MarkupInfo.Foreground = clNone
-            MarkupInfo.FrameEdges = sfeAround
             DigitCount = 2
             ShowOnlyLineNumbersMultiplesOf = 1
             ZeroStart = False
@@ -796,13 +790,11 @@ object FormMain: TFormMain
             MouseActions = <>
             MarkupInfo.Background = clWhite
             MarkupInfo.Foreground = clGray
-            MarkupInfo.FrameEdges = sfeAround
           end
           object SynGutterCodeFolding1: TSynGutterCodeFolding
             MouseActions = <>
             MarkupInfo.Background = clNone
             MarkupInfo.Foreground = clGray
-            MarkupInfo.FrameEdges = sfeAround
             MouseActionsExpanded = <>
             MouseActionsCollapsed = <>
           end
@@ -1259,7 +1251,6 @@ object FormMain: TFormMain
           'Output'
         )
         VisibleSpecialChars = [vscSpace, vscTabAtLast]
-        SelectedColor.FrameEdges = sfeAround
         SelectedColor.BackPriority = 50
         SelectedColor.ForePriority = 50
         SelectedColor.FramePriority = 50
@@ -1267,23 +1258,17 @@ object FormMain: TFormMain
         SelectedColor.ItalicPriority = 50
         SelectedColor.UnderlinePriority = 50
         SelectedColor.StrikeOutPriority = 50
-        IncrementColor.FrameEdges = sfeAround
-        HighlightAllColor.FrameEdges = sfeAround
         BracketHighlightStyle = sbhsBoth
         BracketMatchColor.Background = clNone
         BracketMatchColor.Foreground = clNone
-        BracketMatchColor.FrameEdges = sfeAround
         BracketMatchColor.Style = [fsBold]
         FoldedCodeColor.Background = clNone
         FoldedCodeColor.Foreground = clGray
         FoldedCodeColor.FrameColor = clGray
-        FoldedCodeColor.FrameEdges = sfeAround
         MouseLinkColor.Background = clNone
         MouseLinkColor.Foreground = clBlue
-        MouseLinkColor.FrameEdges = sfeAround
         LineHighlightColor.Background = clNone
         LineHighlightColor.Foreground = clNone
-        LineHighlightColor.FrameEdges = sfeAround
         inline SynLeftGutterPartList1: TSynGutterPartList
           object SynGutterMarks1: TSynGutterMarks
             Width = 24
@@ -1294,7 +1279,6 @@ object FormMain: TFormMain
             MouseActions = <>
             MarkupInfo.Background = clBtnFace
             MarkupInfo.Foreground = clNone
-            MarkupInfo.FrameEdges = sfeAround
             DigitCount = 2
             ShowOnlyLineNumbersMultiplesOf = 1
             ZeroStart = False
@@ -1311,13 +1295,11 @@ object FormMain: TFormMain
             MouseActions = <>
             MarkupInfo.Background = clWhite
             MarkupInfo.Foreground = clGray
-            MarkupInfo.FrameEdges = sfeAround
           end
           object SynGutterCodeFolding1: TSynGutterCodeFolding
             MouseActions = <>
             MarkupInfo.Background = clNone
             MarkupInfo.Foreground = clGray
-            MarkupInfo.FrameEdges = sfeAround
             MouseActionsExpanded = <>
             MouseActionsCollapsed = <>
           end
@@ -1869,17 +1851,6 @@ object FormMain: TFormMain
   end
   object SynPasSyn: TSynPasSyn
     Enabled = False
-    AsmAttri.FrameEdges = sfeAround
-    CommentAttri.FrameEdges = sfeAround
-    IDEDirectiveAttri.FrameEdges = sfeAround
-    IdentifierAttri.FrameEdges = sfeAround
-    KeyAttri.FrameEdges = sfeAround
-    NumberAttri.FrameEdges = sfeAround
-    SpaceAttri.FrameEdges = sfeAround
-    StringAttri.FrameEdges = sfeAround
-    SymbolAttri.FrameEdges = sfeAround
-    CaseLabelAttri.FrameEdges = sfeAround
-    DirectiveAttri.FrameEdges = sfeAround
     CompilerMode = pcmDelphi
     NestedComments = False
     left = 80
