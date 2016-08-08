@@ -9,7 +9,7 @@ object About: TAbout
   ClientHeight = 273
   ClientWidth = 447
   Position = poOwnerFormCenter
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.6.0.4'
   object Image1: TImage
     Left = 9
     Height = 256
@@ -879,10 +879,10 @@ object About: TAbout
   end
   object Label1: TLabel
     Left = 168
-    Height = 30
+    Height = 29
     Top = 8
-    Width = 173
-    Caption = 'DelphiModelMaker'
+    Width = 175
+    Caption = 'PascalModelMaker'
     Font.CharSet = ANSI_CHARSET
     Font.Height = -24
     Font.Name = 'Arial Narrow'
@@ -894,9 +894,9 @@ object About: TAbout
   end
   object Label2: TLabel
     Left = 168
-    Height = 16
+    Height = 15
     Top = 48
-    Width = 58
+    Width = 57
     Caption = 'Version 0.1'
     ParentColor = False
   end
@@ -909,18 +909,18 @@ object About: TAbout
   end
   object Label4: TLabel
     Left = 168
-    Height = 16
+    Height = 15
     Top = 72
-    Width = 199
+    Width = 198
     Caption = 'Andy Dunkel (andy.dunkel@ekiwi.de)'
     ParentColor = False
   end
   object Label5: TLabel
     Cursor = crHandPoint
     Left = 168
-    Height = 16
+    Height = 15
     Top = 96
-    Width = 148
+    Width = 147
     Caption = 'http://www.andydunkel.net'
     Font.Color = clMenuHighlight
     Font.Style = [fsUnderline]

@@ -10,8 +10,8 @@ uses
 type
     { TGenerator }
 TGenerator = class
-      public
-        class function GenerateClassCode(Data: TDataTree): String;
+    public
+      class function GenerateClassCode(Data: TDataTree): String;
 end;
 
 

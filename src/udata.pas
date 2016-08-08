@@ -82,15 +82,14 @@ end;
 
 { TDataTree }
 
-
 constructor TDataTree.Create;
 begin
-     Self.UnitName:= 'ModelUnit';
-     Self.Saved:= false;
-     Self.GenerateObserverCode:=true;
-     Self.PersistanceCode:=false;
-     FClasses:= TChildList.Create(true);
-     FClasses.FreeObjects:= true;
+   Self.UnitName:= 'ModelUnit';
+   Self.Saved:= false;
+   Self.GenerateObserverCode:=true;
+   Self.PersistanceCode:=false;
+   FClasses:= TChildList.Create(true);
+   FClasses.FreeObjects:= true;
 end;
 
 end.

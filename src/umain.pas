@@ -287,30 +287,32 @@ var
    nodeRoot, subNode, attrNode : TTreeNode;
    i,j : integer;
 begin
-     //Root
-     TreeViewModel.Items.Clear;
-     nodeRoot:= TreeViewModel.Items.Add(nil, TreeData.UnitName);
-     nodeRoot.ImageIndex:= 0;
-     nodeRoot.SelectedIndex:= nodeRoot.ImageIndex;
+   //Root
+   TreeViewModel.Items.Clear;
+   nodeRoot:= TreeViewModel.Items.Add(nil, TreeData.UnitName);
+   nodeRoot.ImageIndex:= 0;
+   nodeRoot.SelectedIndex:= nodeRoot.ImageIndex;
 
-     //Classes
-     for i:= 0 to TreeData.Classes.Count - 1 do begin
-         subNode:= TreeViewModel.Items.AddChild(nodeRoot, TreeData.Classes[i].Name);
-         subNode.ImageIndex:= 1;
-         subNode.SelectedIndex:= subNode.ImageIndex;
-         subNode.Data:=Pointer(TreeData.Classes[i]);
+   //Classes
+   for i:= 0 to TreeData.Classes.Count - 1 do begin
+       subNode:= TreeViewModel.Items.AddChild(nodeRoot, TreeData.Classes[i].Name);
+       subNode.ImageIndex:= 1;
+       subNode.SelectedIndex:= subNode.ImageIndex;
+       subNode.Data:=Pointer(TreeData.Classes[i]);
 
-         //Attributes
-         for j:= 0 to TreeData.Classes[i].Children.Count - 1 do begin
-             attrNode:= TreeViewModel.Items.AddChild(subNode, TreeData.Classes[i].Children[j].Name);
-             attrNode.ImageIndex:= 2;
-             attrNode.SelectedIndex:= attrNode.ImageIndex;
-             attrNode.Data:=Pointer(TreeData.Classes[i].Children[j]);
-         end;
-     end;
+       //Attributes
+       for j:= 0 to TreeData.Classes[i].Children.Count - 1 do begin
+           attrNode:= TreeViewModel.Items.AddChild(subNode, TreeData.Classes[i].Children[j].Name);
+           attrNode.ImageIndex:= 2;
+           attrNode.SelectedIndex:= attrNode.ImageIndex;
+           attrNode.Data:=Pointer(TreeData.Classes[i].Children[j]);
+       end;
+   end;
 
-     TreeViewModel.FullExpand;
-     SynEditTemplate.Text:= TGenerator.GenerateClassCode(TreeData);
+   TreeViewModel.FullExpand;
+   SynEditTemplate.Text:= TGenerator.GenerateClassCode(TreeData);
+
+   StatusBar.SimpleText:= TreeData.FilePath;
 end;
 
 procedure TFormMain.SetData(Data: TDataTree);
